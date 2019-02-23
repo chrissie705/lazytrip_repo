@@ -26,15 +26,14 @@ for profil in profils.find({}, {"idProfil":1, "note":1, "idActivity":1, "prenom"
     i = int(profil["idProfil"])
     i_activite = int(profil["idActivity"])
     note = int(profil["note"])
-    notes[i][i_activite] = note
+    notes[i][i_activite] = note #tableau des notes par profil et par activité
     nb_gens = max(i + 1, nb_gens)
     nb_activites = max(i_activite + 1, nb_activites)
     nb_notes += 1
-   
-print(nb_notes, 'notes chargées de', nb_gens, 'personnes sur', nb_activites, 'films')
+print(nb_notes, 'notes chargées de', nb_gens, 'profils sur', nb_activites, 'activités')
 
 #Requete pour récupérer la liste des activites
-for activity in activities.find({}, {"name": 1, "idActivity": 1}):
+for activity in activities.find({}, {"name": 1, "idActivity": 1, "categories":1}):
     id_activity = activity['idActivity']
     titre = activity['name']
     activites[int(id_activity)] = titre
