@@ -1,4 +1,4 @@
-from big import notes, nb_gens, nb_activites, prenoms, activites, NB_VOISINS, NB_PREDICTIONS
+from big import notes, nb_gens, nb_activites, prenoms, activites, categories, NB_VOISINS, NB_PREDICTIONS
 
 #Calcul du score par personne
 def score(i, j):
@@ -46,7 +46,7 @@ def toutes_predictions(i, voisins):
     for i_activite in range(nb_activites):
         if notes[i][i_activite] == 0:  # Si l'activite n'a pas été vu
             note = prediction(i, i_activite, voisins)
-            candidats.append((note, activites[i_activite]))
+            candidats.append((note, activites[i_activite], categories[i_activite]))
     candidats.sort()
     return candidats[-NB_PREDICTIONS:]
 
