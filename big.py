@@ -9,32 +9,32 @@ db.authenticate("test", "firstival1")
 activities = db.activities
 profils = db.profils
 
-nb_gens = 11
-nb_films = 2600
-notes = [[0] * nb_films for _ in range(nb_gens)]
+nb_gens = 24
+nb_activites = 2600
+notes = [[0] * nb_activites for _ in range(nb_gens)]
 prenoms = list(range(nb_gens))
-films = [''] * nb_films
+activites = [''] * nb_activites
 NB_VOISINS = 5
 NB_PREDICTIONS = 30
 
 nb_gens = 0
-nb_films = 0
+nb_activites = 0
 nb_notes = 0
 
-for profil in profils.find({}, {"idProfil":1, "note":1, "idActivity":1}):
+#Requete pour récupérer la liste des profiles et activités qu'ils ont noté
+for profil in profils.find({}, {"idProfil":1, "note":1, "idActivity":1, "prenom":1}):
     i = int(profil["idProfil"])
-    i_film = int(profil["idActivity"])
+    i_activite = int(profil["idActivity"])
     note = int(profil["note"])
-    notes[i][i_film] = note
+    notes[i][i_activite] = note
     nb_gens = max(i + 1, nb_gens)
-    nb_films = max(i_film + 1, nb_films)
+    nb_activites = max(i_activite + 1, nb_activites)
     nb_notes += 1
-    
-print(nb_notes, 'notes chargées de', nb_gens, 'personnes sur', nb_films, 'films')
+   
+print(nb_notes, 'notes chargées de', nb_gens, 'personnes sur', nb_activites, 'films')
 
+#Requete pour récupérer la liste des activites
 for activity in activities.find({}, {"name": 1, "idActivity": 1}):
     id_activity = activity['idActivity']
     titre = activity['name']
-    films[int(id_activity)] = titre
-
-    
+    activites[int(id_activity)] = titre
