@@ -8,6 +8,5 @@ db.authenticate("test", "firstival1")
 
 activities = db.activities
 
-for activity in activities.find({}, {"name": 1}):
+for activity in activities.find({}, {"name": 1, "idActivity": 1}):
   print(activity)
-
