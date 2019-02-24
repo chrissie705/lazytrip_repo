@@ -9,7 +9,7 @@ db.authenticate("test", "firstival1")
 activities = db.activities
 profils = db.profils
 
-nb_gens = 24
+nb_gens = 33
 nb_activites = 2600
 notes = [[0] * nb_activites for _ in range(nb_gens)]
 prenoms = [''] * nb_gens
