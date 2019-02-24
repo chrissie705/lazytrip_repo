@@ -12,10 +12,11 @@ profils = db.profils
 nb_gens = 24
 nb_activites = 2600
 notes = [[0] * nb_activites for _ in range(nb_gens)]
-prenoms = list(range(nb_gens))
+prenoms = [''] * nb_gens
 activites = [''] * nb_activites
+categories = [''] * nb_activites
 NB_VOISINS = 5
-NB_PREDICTIONS = 30
+NB_PREDICTIONS = 15
 
 nb_gens = 0
 nb_activites = 0
@@ -26,15 +27,17 @@ for profil in profils.find({}, {"idProfil":1, "note":1, "idActivity":1, "prenom"
     i = int(profil["idProfil"])
     i_activite = int(profil["idActivity"])
     note = int(profil["note"])
-    notes[i][i_activite] = note
+    notes[i][i_activite] = note #tableau des notes par profil et par activité
+    prenoms[i] = profil['prenom']
     nb_gens = max(i + 1, nb_gens)
     nb_activites = max(i_activite + 1, nb_activites)
     nb_notes += 1
-   
-print(nb_notes, 'notes chargées de', nb_gens, 'personnes sur', nb_activites, 'films')
+
+print(nb_notes, 'notes chargées de', nb_gens, 'profils sur', nb_activites, 'activités')
 
 #Requete pour récupérer la liste des activites
-for activity in activities.find({}, {"name": 1, "idActivity": 1}):
+for activity in activities.find({}, {"name": 1, "idActivity": 1, "categories":1}):
     id_activity = activity['idActivity']
     titre = activity['name']
     activites[int(id_activity)] = titre
+    categories[int(id_activity)] = activity['categories'][0]
