@@ -77,5 +77,9 @@ def nouvel_inscrit():
 
 mon_id = nouvel_inscrit()
 voisins = proches_voisins(mon_id)
+print("#########################")
+print("Nous vous recommandons:")
+print("")
 for ligne in toutes_predictions(mon_id, voisins):
-    print(ligne)
+    print(ligne[1], 'dans la catégorie', ligne[2].upper(), 'avec une affinité de', ligne[0]) 
+    print("")

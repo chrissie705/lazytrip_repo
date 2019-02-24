@@ -33,7 +33,6 @@ for profil in profils.find({}, {"idProfil":1, "note":1, "idActivity":1, "prenom"
     nb_activites = max(i_activite + 1, nb_activites)
     nb_notes += 1
 
-print(prenoms)
 print(nb_notes, 'notes chargées de', nb_gens, 'profils sur', nb_activites, 'activités')
 
 #Requete pour récupérer la liste des activites
