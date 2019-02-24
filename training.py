@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 from big import notes, nb_gens, nb_activites, prenoms, activites, categories, NB_VOISINS, NB_PREDICTIONS
 
 #Calcul du score par personne
@@ -56,24 +56,29 @@ def nouvel_inscrit():
     likes = [0] * nb_activites
     dislikes = [0] * nb_activites
     candidats = []
+    
+    notes_training, notes_test = train_test_split(notes, train_size=0.9)
+    print('echantillonage training', len(notes_training))
+    print('echantillonage test', len(notes_test))
 
     for i_activite in range(nb_activites):
-        for i in range(nb_gens):
-            if notes[i][i_activite] == 1:
+        for i in range(len(notes_training)):
+            if notes_training[i][i_activite] == 1:
                 likes[i_activite] += 1
-            elif notes[i][i_activite] == -1:
+            elif notes_training[i][i_activite] == -1:
                 dislikes[i_activite] += 1
         candidats.append((likes[i_activite] + dislikes[i_activite], activites[i_activite], i_activite))
     candidats.sort() #nombre de votes pour chaque activite
 
-    mon_id = nb_gens
+    mon_id = len(notes_training)
     prenom = input('Prénom ? ')
     prenoms.append(prenom)
 
-    notes.append([0] * nb_activites)  # Nouvelle ligne au tableau de notes
+    notes_training.append([0] * nb_activites)  # Nouvelle ligne au tableau de notes
     for _, titre, i_activite in candidats[-10:]:
         note = int(input('As tu aimé %s ? (%d notes) ' % (titre, _)))
-        notes[mon_id][i_activite] = note
+        notes_training[mon_id][i_activite] = note
+    
     return mon_id
 
 mon_id = nouvel_inscrit()
@@ -81,19 +86,6 @@ voisins = proches_voisins(mon_id)
 print("#########################")
 print("Nous vous recommandons:")
 print("")
-
-x = [""] * len(toutes_predictions(mon_id, voisins))
-y = [0] * len(toutes_predictions(mon_id, voisins))
-
-for i, ligne in enumerate(toutes_predictions(mon_id, voisins)):
-    x[i] = "A"+str(i+1)
-    y[i] = ligne[0]
+for ligne in toutes_predictions(mon_id, voisins):
     print(ligne[1], 'dans la catégorie', ligne[2].upper(), 'avec une affinité de', ligne[0]) 
     print("")
-
-plt.scatter(x, y, s=40, c='red', label='Label 1')
-plt.title('Les recommandations')
-plt.xlabel('Activités')
-plt.ylabel('Affinités')
-plt.savefig("reco_graph.png", bbox_inches='tight')
-plt.show()
