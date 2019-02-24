@@ -1,4 +1,5 @@
 import warnings
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from big import notes, nb_gens, nb_activites, prenoms, activites, categories, NB_VOISINS, NB_PREDICTIONS
 
@@ -94,3 +95,19 @@ print("")
 for ligne in toutes_predictions(mon_id, voisins):
     print(ligne[1], 'dans la catégorie', ligne[2].upper(), 'avec une affinité de', ligne[0]) 
     print("")
+
+x = [""] * len(toutes_predictions(mon_id, voisins))
+y = [0] * len(toutes_predictions(mon_id, voisins))
+
+for i, ligne in enumerate(toutes_predictions(mon_id, voisins)):
+    x[i] = "A"+str(i+1)
+    y[i] = ligne[0]
+    print(ligne[1], 'dans la catégorie', ligne[2].upper(), 'avec une affinité de', ligne[0]) 
+    print("")
+
+plt.scatter(x, y, s=40, c='red', label='Label 1')
+plt.title('Les recommandations')
+plt.xlabel('Activités')
+plt.ylabel('Affinités')
+plt.savefig("reco_graph.png", bbox_inches='tight')
+plt.show()
