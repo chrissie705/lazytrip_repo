@@ -10,7 +10,7 @@ activities = db.activities
 profils = db.profils
 
 nb_gens = 33
-nb_activites = 2600
+nb_activites = 2546
 notes = [[0] * nb_activites for _ in range(nb_gens)]
 prenoms = [''] * nb_gens
 activites = [''] * nb_activites

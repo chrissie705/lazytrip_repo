@@ -56,13 +56,13 @@ def nouvel_inscrit():
     dislikes = [0] * nb_activites
     candidats = []
 
-    for i_film in range(nb_activites):
+    for i_activite in range(nb_activites):
         for i in range(nb_gens):
-            if notes[i][i_film] == 1:
-                likes[i_film] += 1
-            elif notes[i][i_film] == -1:
-                dislikes[i_film] += 1
-        candidats.append((likes[i_film] + dislikes[i_film], activites[i_film], i_film))
+            if notes[i][i_activite] == 1:
+                likes[i_activite] += 1
+            elif notes[i][i_activite] == -1:
+                dislikes[i_activite] += 1
+        candidats.append((likes[i_activite] + dislikes[i_activite], activites[i_activite], i_activite))
     candidats.sort()
 
     mon_id = nb_gens
@@ -70,9 +70,9 @@ def nouvel_inscrit():
     prenoms.append(prenom)
 
     notes.append([0] * nb_activites)  # Nouvelle ligne au tableau de notes
-    for _, titre, i_film in candidats[-10:]:
+    for _, titre, i_activite in candidats[-10:]:
         note = int(input('As tu aimé %s ? (%d notes) ' % (titre, _)))
-        notes[mon_id][i_film] = note
+        notes[mon_id][i_activite] = note
     return mon_id
 
 mon_id = nouvel_inscrit()
