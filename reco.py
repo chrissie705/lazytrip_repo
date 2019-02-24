@@ -22,7 +22,7 @@ def proches_voisins(i):
         if j != i:
             candidats.append((score(i, j), prenoms[j], j))
     candidats.sort()
-    
+    print("")
     print('Les', NB_VOISINS, 'profils les plus proches de', prenoms[i], 'sont :')
     voisins = []
     for poids, nom, j in candidats[-NB_VOISINS:]:
