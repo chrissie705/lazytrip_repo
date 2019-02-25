@@ -63,7 +63,7 @@ def nouvel_inscrit():
                 likes[i_activite] += 1
             elif notes[i][i_activite] == -1:
                 dislikes[i_activite] += 1
-        candidats.append((likes[i_activite] + dislikes[i_activite], activites[i_activite], i_activite))
+        candidats.append((likes[i_activite] + dislikes[i_activite], activites[i_activite], categories[i_activite], i_activite))
     candidats.sort() #nombre de votes pour chaque activite
 
     mon_id = nb_gens
@@ -71,14 +71,15 @@ def nouvel_inscrit():
     prenoms.append(prenom)
 
     notes.append([0] * nb_activites)  # Nouvelle ligne au tableau de notes
-    for _, titre, i_activite in candidats[-10:]:
-        note = int(input('Avez-vous aimé %s ? (%d notes) ' % (titre, _)))
+    for _, titre, categorie, i_activite in candidats[-10:]:
+        note = int(input('Avez-vous aimé %s dans la catégorie %s ? (%d notes) ' % (titre, categorie.upper(), _)))
         notes[mon_id][i_activite] = note
     return mon_id
 
 mon_id = nouvel_inscrit()
 voisins = proches_voisins(mon_id)
 print("#########################")
+
 print("Nous vous recommandons:")
 print("")
 
