@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+ import matplotlib.pyplot as plt
 from big import notes, nb_gens, nb_activites, prenoms, activites, categories, NB_VOISINS, NB_PREDICTIONS
 
 #Calcul du score par personne
@@ -72,7 +72,7 @@ def nouvel_inscrit():
 
     notes.append([0] * nb_activites)  # Nouvelle ligne au tableau de notes
     for _, titre, i_activite in candidats[-10:]:
-        note = int(input('As tu aimé %s ? (%d notes) ' % (titre, _)))
+        note = int(input('Avez-vous aimé %s ? (%d notes) ' % (titre, _)))
         notes[mon_id][i_activite] = note
     return mon_id
 
