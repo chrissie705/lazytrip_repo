@@ -1,4 +1,4 @@
- import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from big import notes, nb_gens, nb_activites, prenoms, activites, categories, NB_VOISINS, NB_PREDICTIONS
 
 #Calcul du score par personne
