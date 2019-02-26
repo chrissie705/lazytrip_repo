@@ -15,7 +15,7 @@ notes = [[0] * nb_activites for _ in range(nb_gens)]
 prenoms = [''] * nb_gens
 activites = [''] * nb_activites
 categories = [''] * nb_activites
-NB_VOISINS = 5
+NB_VOISINS = 7
 NB_PREDICTIONS = 15
 
 nb_gens = 0
@@ -36,8 +36,10 @@ for profil in profils.find({}, {"idProfil":1, "note":1, "idActivity":1, "prenom"
 print(nb_notes, 'notes chargées de', nb_gens, 'profils sur', nb_activites, 'activités')
 
 #Requete pour récupérer la liste des activites
+i = 0
 for activity in activities.find({}, {"name": 1, "idActivity": 1, "categories":1}):
-    id_activity = activity['idActivity']
+    id_activity = i
     titre = activity['name']
     activites[int(id_activity)] = titre
     categories[int(id_activity)] = activity['categories'][0]
+    i += 1
