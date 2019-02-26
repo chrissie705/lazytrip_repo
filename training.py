@@ -98,7 +98,7 @@ y = [0] * len(toutes_predictions(mon_id, voisins))
 for i, ligne in enumerate(toutes_predictions(mon_id, voisins)):
     x[i] = "A"+str(i+1)
     y[i] = ligne[0]
-    print(ligne[1], 'dans la catégorie', ligne[2].upper(), 'avec une affinité de', ligne[0]) 
+    print(ligne[1], 'dans la catégorie', ligne[2].upper(), 'avec une affinité de', round(ligne[0],2)) 
     print("")
 
 plt.scatter(x, y, s=40, c='red', label='Label 1')
